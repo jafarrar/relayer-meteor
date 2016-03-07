@@ -11,6 +11,10 @@ angular.module('relayer')
                 url: '/:slug/edit',
                 template: '<stream-edit></stream-edit>'
             })
+            .state('streamView', {
+                url: '/:slug',
+                template: '<stream-view></stream-view>'
+            })
 
         $urlRouterProvider.otherwise("/");
     });

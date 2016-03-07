@@ -5,4 +5,5 @@ Edit stream
 View stream
 Stream slug, auto generate with edit
 Slugs instead of IDs in url
+View stream
 User/auth
