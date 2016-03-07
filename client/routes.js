@@ -5,7 +5,7 @@ angular.module('relayer')
         $stateProvider
             .state('home', {
                 url: '/',
-                template: '<relayer></relayer>'
+                template: '<streams-list></streams-list>'
             })
 
         $urlRouterProvider.otherwise("/");
