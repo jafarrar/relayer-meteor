@@ -13,6 +13,17 @@ angular.module('relayer').directive('streamView', function() {
                     return Streams.findOne({ slug: $stateParams.slug });
                 }
             });
+
+            this.autorun(() => {
+                if(JWPlayer.loaded()) {
+                    jwplayer('player').setup({
+                        file: 'rtmp://kegwen.com/' + this.stream.slug + '/' + this.stream.streamKey,
+                        width: this.stream.resX,
+                        height: this.stream.resY,
+                        autostart: true
+                    });
+                }
+            });
         }
     }
 });

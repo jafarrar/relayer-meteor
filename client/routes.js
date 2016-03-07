@@ -13,7 +13,10 @@ angular.module('relayer')
             })
             .state('streamView', {
                 url: '/:slug',
-                template: '<stream-view></stream-view>'
+                template: '<stream-view></stream-view>',
+                onEnter: function() {
+                    JWPlayer.load(Meteor.settings.public.jwplayerKey);
+                }
             })
 
         $urlRouterProvider.otherwise("/");

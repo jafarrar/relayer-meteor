@@ -1,9 +1,14 @@
-Stream model
-List of streams (root)
-Add/remove streams
-Edit stream
-View stream
-Stream slug, auto generate with edit
-Slugs instead of IDs in url
-View stream
 User/auth
+List of available channels defined by the nginx-rtmp server (available for create/edit as dropdown, store choice in stream.channel)
+Confirm delete stream
+State change if slug is updated
+Check if slug is unique on create and edit
+Boolean public for stream, if not public require login for view page
+.
+.
+.
+.
+Overall Relayer UI
+Stream List UI
+Stream Edit UI
+Stream View UI
