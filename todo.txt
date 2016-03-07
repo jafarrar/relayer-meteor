@@ -3,4 +3,6 @@ List of streams (root)
 Add/remove streams
 Edit stream
 View stream
+Stream slug, auto generate with edit
+Slugs instead of IDs in url
 User/auth

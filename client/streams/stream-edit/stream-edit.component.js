@@ -10,14 +10,15 @@ angular.module('relayer').directive('streamEdit', function() {
 
             this.helpers({
                 stream: () => {
-                    return Streams.findOne({ _id: $stateParams.streamId });
+                    return Streams.findOne({ slug: $stateParams.slug });
                 }
             });
 
             this.updateStream = () => {
-                Streams.update({ _id: $stateParams.streamId }, {
+                Streams.update({ _id: this.stream._id }, {
                     $set: {
                         name: this.stream.name,
+                        slug: this.stream.slug,
                         description: this.stream.description,
                         streamKey: this.stream.streamKey,
                         resX: this.stream.resX,
@@ -31,6 +32,10 @@ angular.module('relayer').directive('streamEdit', function() {
                         console.log("Stream updated.");
                     }
                 });
+            };
+
+            this.generateStreamKey = () => {
+                this.stream.streamKey = Random.id();
             };
         }
     }

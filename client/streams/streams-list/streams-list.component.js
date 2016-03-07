@@ -22,6 +22,7 @@ angular.module('relayer').directive('streamsList', function() {
             this.addStream = () => {
                 this.newStream.creator = Meteor.user()._id;
                 this.newStream.streamKey = Random.id();
+                this.newStream.slug = _.slugify(this.newStream.name);
                 Streams.insert(this.newStream);
                 this.newStream = {};
             };

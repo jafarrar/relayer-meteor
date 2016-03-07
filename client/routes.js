@@ -8,7 +8,7 @@ angular.module('relayer')
                 template: '<streams-list></streams-list>'
             })
             .state('streamEdit', {
-                url: '/:streamId/edit',
+                url: '/:slug/edit',
                 template: '<stream-edit></stream-edit>'
             })
 
