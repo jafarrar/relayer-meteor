@@ -1,6 +1,8 @@
+<h2>Streams List</h2>
 <ul>
     <li ng-repeat="stream in sl.streams">
         {{stream.name}}
+        <button ui-sref="streamEdit({streamId: stream._id})">Edit</button>
         <button ng-click="sl.removeStream(stream)">Remove</button>
     </li>
 </ul>

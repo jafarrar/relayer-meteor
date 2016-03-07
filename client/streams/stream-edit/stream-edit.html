@@ -1,0 +1,13 @@
+<h2>Edit Stream</h2>
+<form>
+    <label>Name</label>
+    <input ng-model="se.stream.name" />
+    <label>Description</label>
+    <input ng-model="se.stream.description" />
+    <label>Stream Key</label>
+    <input ng-model="se.stream.streamKey" />
+    <label>Resolution</label>
+    <input ng-model="se.stream.resX" /> x
+    <input ng-model="se.stream.resY" />
+    <button ng-click="se.updateStream()">Save</button>
+</form>

@@ -7,6 +7,10 @@ angular.module('relayer')
                 url: '/',
                 template: '<streams-list></streams-list>'
             })
+            .state('streamEdit', {
+                url: '/:streamId/edit',
+                template: '<stream-edit></stream-edit>'
+            })
 
         $urlRouterProvider.otherwise("/");
     });
