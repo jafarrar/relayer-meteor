@@ -1,3 +1,13 @@
 <ul>
-    <li ng-repeat="stream in sl.streams">{{stream.name}}</li>
+    <li ng-repeat="stream in sl.streams">
+        {{stream.name}}
+        <button ng-click="sl.removeStream(stream)">Remove</button>
+    </li>
 </ul>
+<form>
+    <input ng-model="sl.newStream.name" />
+    <input ng-model="sl.newStream.description" />
+    <input ng-model="sl.newStream.resX" placeholder=1280 />
+    <input ng-model="sl.newStream.resY" placeholder=720 />
+    <button ng-click="sl.addStream()">Add Stream</button>
+</form>
