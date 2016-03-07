@@ -4,6 +4,10 @@ Confirm delete stream
 State change if slug is updated
 Check if slug is unique on create and edit
 Boolean public for stream, if not public require login for view page
+Application variables for: RTMP server url, RTMP stat url, RTMP control url
+Figure out how to drop a stream in nginx-rtmp https://github.com/arut/nginx-rtmp-module/wiki/Control-module#drop - http://kegwen.com/control/drop/publisher?app={{stream.channel}}&name={{stream.streamKey}}
+Number of viewers https://github.com/arut/nginx-rtmp-module/wiki/Getting-number-of-subscribers
+
 .
 .
 .
