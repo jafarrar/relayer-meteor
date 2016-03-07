@@ -5,9 +5,12 @@
     </li>
 </ul>
 <form>
+    <label>Name</label>
     <input ng-model="sl.newStream.name" />
+    <label>Description</label>
     <input ng-model="sl.newStream.description" />
-    <input ng-model="sl.newStream.resX" placeholder=1280 />
-    <input ng-model="sl.newStream.resY" placeholder=720 />
+    <label>Resolution</label>
+    <input ng-model="sl.newStream.resX" /> x
+    <input ng-model="sl.newStream.resY" />
     <button ng-click="sl.addStream()">Add Stream</button>
 </form>

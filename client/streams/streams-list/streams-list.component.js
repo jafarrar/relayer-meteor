@@ -6,7 +6,10 @@ angular.module('relayer').directive('streamsList', function() {
         controller: function($scope, $reactive) {
             $reactive(this).attach($scope);
 
-            this.newStream = {};
+            this.newStream = {
+                'resX': 1280,
+                'resY': 720
+            };
 
             this.subscribe('streams');
 
@@ -18,6 +21,7 @@ angular.module('relayer').directive('streamsList', function() {
 
             this.addStream = () => {
                 this.newStream.creator = Meteor.user()._id;
+                this.newStream.streamKey = Random.id();
                 Streams.insert(this.newStream);
                 this.newStream = {};
             };
@@ -25,6 +29,7 @@ angular.module('relayer').directive('streamsList', function() {
             this.removeStream = (stream) => {
                 Streams.remove({ _id: stream._id });
             };
+
         }
     }
 })
