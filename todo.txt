@@ -1,0 +1,6 @@
+Stream model
+List of streams (root)
+Add/remove streams
+Edit stream
+View stream
+User/auth
