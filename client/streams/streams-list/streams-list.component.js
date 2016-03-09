@@ -23,8 +23,15 @@ angular.module('relayer').directive('streamsList', function() {
                 this.newStream.creator = Meteor.user()._id;
                 this.newStream.streamKey = Random.id();
                 this.newStream.slug = _.slugify(this.newStream.name);
-                Streams.insert(this.newStream);
-                this.newStream = {};
+
+                // ugly check if slug is unique
+                let count = Streams.find({'slug': this.newStream.slug}).count();
+
+                if (count === 0) {
+                    Streams.insert(this.newStream);
+                    this.newStream = {};
+                }
+
             };
 
             this.removeStream = (stream) => {

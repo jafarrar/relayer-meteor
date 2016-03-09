@@ -22,7 +22,8 @@ angular.module('relayer').directive('streamEdit', function() {
                         description: this.stream.description,
                         streamKey: this.stream.streamKey,
                         resX: this.stream.resX,
-                        resY: this.stream.resY
+                        resY: this.stream.resY,
+                        public: this.stream.public
                     }
                 }, (error) => {
                     if (error) {
