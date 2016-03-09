@@ -1,0 +1,8 @@
+{
+    "jwPlayerKey": "",
+    "public": {
+        "baseUrl": "rtmp://yourserver.com",
+        "controlUrl": "http://yourserver.com/control",
+        "statUrl": "http://yourserver.com/stat"
+    }
+}

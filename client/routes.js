@@ -1,3 +1,14 @@
+let requireLogin = {
+    currentUser: ($q) => {
+        if (Meteor.userId() == null) {
+            return $q.reject('AUTH_REQUIRED');
+        }
+        else {
+            return $q.resolve();
+        }
+    }
+};
+
 angular.module('relayer')
     .config(function($urlRouterProvider, $stateProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
@@ -6,18 +17,8 @@ angular.module('relayer')
             .state('home', {
                 url: '/',
                 template: '<streams-list></streams-list>',
-                resolve: {
-                    currentUser: ($q) => {
-                        if (Meteor.userId() == null) {
-                            return $q.reject('AUTH_REQUIRED');
-                        }
-                        else {
-                            return $q.resolve();
-                        }
-                    }
-                }
+                resolve: requireLogin
             })
-
             .state('login', {
                 url: '/login',
                 template: '<login></login>'
@@ -31,21 +32,12 @@ angular.module('relayer')
                 template: '<resetpw></resetpw>'
             })
             .state('streamEdit', {
-                url: '/:slug/edit',
+                url: '/stream/:slug/edit',
                 template: '<stream-edit></stream-edit>',
-                resolve: {
-                    currentUser: ($q) => {
-                        if (Meteor.userId() == null) {
-                            return $q.reject('AUTH_REQUIRED');
-                        }
-                        else {
-                            return $q.resolve();
-                        }
-                    }
-                }
+                resolve: requireLogin
             })
             .state('streamView', {
-                url: '/:slug',
+                url: '/stream/:slug',
                 template: '<stream-view></stream-view>',
                 onEnter: function() {
                     JWPlayer.load(Meteor.settings.public.jwplayerKey);
