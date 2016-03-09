@@ -3,7 +3,7 @@ angular.module('relayer').directive('streamEdit', function() {
         restrict: 'E',
         templateUrl: 'client/streams/stream-edit/stream-edit.html',
         controllerAs: 'se',
-        controller: function($scope, $stateParams, $reactive) {
+        controller: function($scope, $stateParams, $reactive, $state) {
             $reactive(this).attach($scope);
 
             this.subscribe('streams');
@@ -32,6 +32,10 @@ angular.module('relayer').directive('streamEdit', function() {
                         console.log("Stream updated.");
                     }
                 });
+
+                if (this.stream.slug != $stateParams.slug) {
+                    $state.go('streamEdit', {slug: this.stream.slug});
+                }
             };
 
             this.generateStreamKey = () => {
