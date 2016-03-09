@@ -6,6 +6,8 @@ angular.module('relayer').directive('relayer', function() {
         controller: function ($scope, $reactive, $state) {
             $reactive(this).attach($scope);
 
+            this.subscribe('users');
+
             this.helpers({
                 isLoggedIn: () => {
                     return Meteor.userId() !== null;

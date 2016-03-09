@@ -1,4 +1,5 @@
-user admin (create/remove/update/change-privileges)
+better security on user admin
+some kind of default admin user for first-installs, with notification to change it
 View page: reactive alert if channel or streamKey changes, offer optional refresh button (or reinitialize player) with new key
 List of available channels defined by the nginx-rtmp server (available for create/edit as dropdown, store choice in stream.channel)
 Confirm delete stream

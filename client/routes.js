@@ -31,6 +31,10 @@ angular.module('relayer')
                 url: '/resetpw',
                 template: '<resetpw></resetpw>'
             })
+            .state('users', {
+                url: '/users',
+                template: '<users></users>'
+            })
             .state('streamEdit', {
                 url: '/stream/:slug/edit',
                 template: '<stream-edit></stream-edit>',

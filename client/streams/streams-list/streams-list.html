@@ -3,18 +3,22 @@
     <li ng-repeat="stream in sl.streams">
         {{stream.name}}
         <button ui-sref="streamView({slug: stream.slug})">View</button>
-        <button ui-sref="streamEdit({slug: stream.slug})">Edit</button>
-        <button ng-click="sl.removeStream(stream)">Remove</button>
+        <span ng-if="vm.currentUser.isAdmin">
+            <button ui-sref="streamEdit({slug: stream.slug})">Edit</button>
+            <button ng-click="sl.removeStream(stream)">Remove</button>
+        </span>
     </li>
 </ul>
+<div ng-if="vm.currentUser.isAdmin">
 <h3>New Stream</h3>
-<form>
-    <label>Name</label>
-    <input ng-model="sl.newStream.name" type="text" />
-    <label>Description</label>
-    <input ng-model="sl.newStream.description" type="text" />
-    <label>Resolution</label>
-    <input ng-model="sl.newStream.resX" /> x
-    <input ng-model="sl.newStream.resY" />
-    <button ng-click="sl.addStream()">Add Stream</button>
-</form>
+    <form>
+        <label>Name</label>
+        <input ng-model="sl.newStream.name" type="text" />
+        <label>Description</label>
+        <input ng-model="sl.newStream.description" type="text" />
+        <label>Resolution</label>
+        <input ng-model="sl.newStream.resX" /> x
+        <input ng-model="sl.newStream.resY" />
+        <button ng-click="sl.addStream()">Add Stream</button>
+    </form>
+</div>
