@@ -1,3 +1,8 @@
 <h2>Stream View</h2>
 <h3>{{sv.stream.name}}</h3>
 <div id="player"></div>
+<button ng-click="sv.play()">Play</button>
+<button ng-click="sv.pause()">Pause</button>
+<button ng-click="sv.stop()">Stop</button>
+<label>Volume</label>
+<input type="range" ng-model="sv.volume" ng-change="sv.setVolume() "/>

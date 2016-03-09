@@ -40,7 +40,7 @@ angular.module('relayer')
                 url: '/stream/:slug',
                 template: '<stream-view></stream-view>',
                 onEnter: function() {
-                    JWPlayer.load(Meteor.settings.public.jwplayerKey);
+                    JWPlayer.load(Meteor.settings.public.jwPlayerKey);
                 }
             });
 
