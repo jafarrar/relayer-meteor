@@ -1,4 +1,5 @@
-User/auth
+settings
+user admin (create/remove/update/change-privileges)
 List of available channels defined by the nginx-rtmp server (available for create/edit as dropdown, store choice in stream.channel)
 Confirm delete stream
 State change if slug is updated
@@ -7,7 +8,8 @@ Boolean public for stream, if not public require login for view page
 Application variables for: RTMP server url, RTMP stat url, RTMP control url
 Figure out how to drop a stream in nginx-rtmp https://github.com/arut/nginx-rtmp-module/wiki/Control-module#drop - http://kegwen.com/control/drop/publisher?app={{stream.channel}}&name={{stream.streamKey}}
 Number of viewers https://github.com/arut/nginx-rtmp-module/wiki/Getting-number-of-subscribers
-
+Slack hooks (went live etc)
+self-host JWPlayer, adapt jwplayer module principles 
 .
 .
 .

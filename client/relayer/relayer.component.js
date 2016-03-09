@@ -3,7 +3,7 @@ angular.module('relayer').directive('relayer', function() {
         restrict: 'E',
         templateUrl: 'client/relayer/relayer.html',
         controllerAs: 'vm',
-        controller: function ($scope, $reactive) {
+        controller: function ($scope, $reactive, $state) {
             $reactive(this).attach($scope);
 
             this.helpers({
@@ -17,6 +17,7 @@ angular.module('relayer').directive('relayer', function() {
 
             this.logout = () => {
                 Accounts.logout();
+                $state.go('login');
             }
         }
     }
