@@ -4,5 +4,6 @@
         "baseUrl": "rtmp://yourserver.com",
         "controlUrl": "http://yourserver.com/control",
         "statUrl": "http://yourserver.com/stat"
-    }
+    },
+    "baseUserPassword": "abc123"
 }

@@ -1,13 +1,16 @@
 better security on user admin
-some kind of default admin user for first-installs, with notification to change it
 View page: reactive alert if channel or streamKey changes, offer optional refresh button (or reinitialize player) with new key
 List of available channels defined by the nginx-rtmp server (available for create/edit as dropdown, store choice in stream.channel)
+Separate slug from rtmp url - use ^ channel list
 Confirm delete stream
 Abstract slug uniqueness check to a model object method, add to edit page
 Figure out how to drop a stream in nginx-rtmp https://github.com/arut/nginx-rtmp-module/wiki/Control-module#drop - http://kegwen.com/control/drop/publisher?app={{stream.channel}}&name={{stream.streamKey}}
 Number of viewers https://github.com/arut/nginx-rtmp-module/wiki/Getting-number-of-subscribers
+write some tests, you filth
 Slack hooks (went live etc)
 self-host JWPlayer, adapt jwplayer module principles
+google analytics (including for jwplayer)
+documentation: settings.json, default admin password, nginx-rtmp setup
 .
 .
 .
