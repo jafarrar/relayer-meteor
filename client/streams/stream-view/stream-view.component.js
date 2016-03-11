@@ -20,10 +20,13 @@ angular.module('relayer').directive('streamView', function() {
             });
 
             this.autorun(() => {
+                // Reactively check if viewer still have permission to view page
+                let showStream = this.getReactively('stream.public') || false;
+
                 // Reactively kick user back to login screen if not logged in and the stream isn't public
-                let showStream = this.getReactively('stream.public');
                 if (angular.isDefined(showStream)) {
                     if (!Meteor.userId() && showStream === false) {
+                        console.log("stream show check");
                         $state.go('login');
                     };
                 }
@@ -38,7 +41,7 @@ angular.module('relayer').directive('streamView', function() {
                 let playerInstance = jwplayer('player');
 
                 let playerOptions = {
-                    file: this.baseUrl + '/' + this.stream.slug + '/' + this.stream.streamKey,
+                    file: this.baseUrl + '/' + this.stream.channel + '/' + this.stream.streamKey,
                     width: this.stream.resX,
                     height: this.stream.resY,
                     volume: this.volume,

@@ -1,11 +1,11 @@
 <h2>Users</h2>
 <button ng-click="ua.showAddUserForm = !ua.showAddUserForm" ng-show="!ua.showAddUserForm">Add New User</button>
-<form ng-show="ua.showAddUserForm">
+<form ng-show="ua.showAddUserForm" name="new-user">
     <label>Email</label>
-    <input ng-model="ua.credentials.email" type="email" required />
+    <input ng-model="ua.credentials.email" type="email" name="email" required />
     <label>Password</label>
-    <input ng-model="ua.credentials.password" type="text" required />
-    <button ng-click="ua.generatePassword()" type="button">Generate Password</button>
+    <input ng-model="ua.credentials.password" type="text" name="newpw" required />
+    <button ng-click="ua.generatePassword()" type="button" name="generate">Generate Password</button>
     <button ng-click="ua.createUser()" type="submit">Add</button>
 </form>
 <p>{{ua.users}}</p>
@@ -14,8 +14,8 @@
         {{ user | displayName }}
         {{user.asdf}}
         <label>Admin</label>
-        <input ng-model="user.isAdmin" type="checkbox" />
+        <button ng-hide="user.isAdmin" ng-click="ua.setAdmin(user)">Promote to Admin</button>
+        <button ng-show="user.isAdmin" ng-click="ua.revokeAdmin(user)">Revoke Admin</button>
         <button ng-click="ua.removeUser(user)">Delete</button>
-        <button ng-click="ua.setAdmin(user)">Save</button>
     </li>
 </ul>

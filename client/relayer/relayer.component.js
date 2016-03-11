@@ -8,6 +8,14 @@ angular.module('relayer').directive('relayer', function() {
 
             this.subscribe('users');
 
+            this.streamChannels =
+            [
+                'stream',
+                'archon-feed',
+                'player1-cam',
+                'player2-cam'
+            ];
+
             this.helpers({
                 isLoggedIn: () => {
                     return Meteor.userId() !== null;

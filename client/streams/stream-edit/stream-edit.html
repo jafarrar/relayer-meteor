@@ -7,6 +7,11 @@
     <label>Description</label>
     <input ng-model="se.stream.description" />
     <label>Stream Key</label>
+    <label>Channel</label>
+    <select ng-model="se.stream.channel" required>
+        <option value=""></option>
+        <option ng-repeat="option in vm.streamChannels" value="{{option}}">{{option}}</option>
+    </select>
     <input ng-model="se.stream.streamKey" />
     <button ng-click="se.generateStreamKey()">Generate new key</button>
     <label>Resolution</label>
@@ -15,4 +20,7 @@
     <label>Public</label>
     <input ng-model="se.stream.public" type="checkbox" />
     <button ng-click="se.updateStream()">Save</button>
+    <div ng-show="se.error">
+        {{se.error}}
+    </div>
 </form>

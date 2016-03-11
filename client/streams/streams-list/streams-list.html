@@ -11,14 +11,24 @@
 </ul>
 <div ng-if="vm.currentUser.isAdmin">
 <h3>New Stream</h3>
-    <form>
+    <form name="new-stream">
         <label>Name</label>
-        <input ng-model="sl.newStream.name" type="text" />
+        <input ng-model="sl.newStream.name" type="text" name="streamName" />
+        <label>Slug</label>
+        <input ng-model="sl.newStream.slug" type="text" name="streamSlug" disabled />
         <label>Description</label>
-        <input ng-model="sl.newStream.description" type="text" />
+        <input ng-model="sl.newStream.description" name="streamDescription" type="text" />
+        <label>Channel</label>
+        <select ng-model="sl.newStream.channel">
+            <option value=""></option>
+            <option ng-repeat="option in vm.streamChannels" value="{{option}}">{{option}}</option>
+        </select>
         <label>Resolution</label>
         <input ng-model="sl.newStream.resX" /> x
         <input ng-model="sl.newStream.resY" />
         <button ng-click="sl.addStream()">Add Stream</button>
+        <div ng-show="sl.error">
+            {{ sl.error }}
+        </div>
     </form>
 </div>

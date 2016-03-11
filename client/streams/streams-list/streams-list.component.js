@@ -7,9 +7,12 @@ angular.module('relayer').directive('streamsList', function() {
             $reactive(this).attach($scope);
 
             this.newStream = {
+                'slug': '',
                 'resX': 1280,
                 'resY': 720
             };
+
+            this.error = "";
 
             this.subscribe('streams');
 
@@ -19,22 +22,37 @@ angular.module('relayer').directive('streamsList', function() {
                 }
             });
 
+            this.autorun(() => {
+                this.newStream.slug = _.slugify(this.getReactively('newStream.name'));
+            });
+
             this.addStream = () => {
                 this.newStream.creator = Meteor.user()._id;
                 this.newStream.streamKey = Random.id();
-                this.newStream.slug = _.slugify(this.newStream.name);
 
-                // ugly check if slug is unique
-                let count = Streams.find({'slug': this.newStream.slug}).count();
-
-                if (count === 0) {
-                    Streams.insert(this.newStream);
+                if(this.newStream.slug && this.newStream.channel) {
+                    Streams.insert(this.newStream,
+                        (error, result) => {
+                            if (error) {
+                                console.log(error)
+                            }
+                            if (result) {
+                                console.log(result);
+                            }
+                    });
                     this.newStream = {};
+                }
+                else {
+                    this.error = "Please complete the form before submitting.";
                 }
 
             };
 
             this.removeStream = (stream) => {
+                if(!confirm("Remove stream?")) {
+                    return false;
+                }
+
                 Streams.remove({ _id: stream._id });
             };
 

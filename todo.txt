@@ -1,9 +1,5 @@
-better security on user admin
+Get list of available channels from nginx-rtmp server
 View page: reactive alert if channel or streamKey changes, offer optional refresh button (or reinitialize player) with new key
-List of available channels defined by the nginx-rtmp server (available for create/edit as dropdown, store choice in stream.channel)
-Separate slug from rtmp url - use ^ channel list
-Confirm delete stream
-Abstract slug uniqueness check to a model object method, add to edit page
 Figure out how to drop a stream in nginx-rtmp https://github.com/arut/nginx-rtmp-module/wiki/Control-module#drop - http://kegwen.com/control/drop/publisher?app={{stream.channel}}&name={{stream.streamKey}}
 Number of viewers https://github.com/arut/nginx-rtmp-module/wiki/Getting-number-of-subscribers
 write some tests, you filth

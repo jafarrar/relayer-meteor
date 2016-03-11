@@ -28,7 +28,6 @@ angular.module('relayer').directive('users', function() {
                     }
                     else {
                         console.log("User added");
-                        clearForm();
                     }
                 });
 
@@ -37,9 +36,13 @@ angular.module('relayer').directive('users', function() {
             };
 
             this.removeUser = (user) => {
+                if(!confirm("Remove user?")) {
+                    return false;
+                }
+
                 Meteor.call('removeUser', user._id, (error) => {
                     if (error) {
-                        console.log("Unable to remove user");
+                        console.log("Unable to remove user", error);
                     }
                     else {
                         console.log("User removed");
@@ -51,6 +54,14 @@ angular.module('relayer').directive('users', function() {
                 Meteor.users.update(user._id, {
                     $set: {
                         isAdmin: true
+                    }
+                });
+            };
+
+            this.revokeAdmin = (user) => {
+                Meteor.users.update(user._id, {
+                    $set: {
+                        isAdmin: false
                     }
                 });
             };

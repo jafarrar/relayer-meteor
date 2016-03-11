@@ -1,3 +1,12 @@
+Meteor.users.allow({
+    update: function (userId, user, fields, modifier) {
+        return userId && user.isAdmin;
+    },
+    remove: function (userId, user) {
+        return userId && user.isAdmin;
+    }
+});
+
 Meteor.methods({
     addUser: function(newUser) {
         check(newUser, {
@@ -16,10 +25,12 @@ Meteor.methods({
 
         let user = Meteor.users.findOne({_id: userId});
 
+        console.log(user);
+
         if (!user)
             throw new Meteor.Error(404, "No such user");
 
-        if (user.admin)
+        if (user.isAdmin)
             throw new Meteor.Error(404, "Cannot delete a current administrator");
 
         Meteor.users.remove(userId);
@@ -33,7 +44,7 @@ Meteor.methods({
         if (!user)
             throw new Meteor.Error(404, "No such user");
 
-        console.log(user);
+        console.log("hello", user);
 
         if (!user.isAdmin) {
             Meteor.users.update(userId, {

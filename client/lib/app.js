@@ -6,6 +6,8 @@ angular.module('relayer', [
     'accounts.ui'
 ]);
 
+var test123 = "hello";
+
 function onReady() {
     angular.bootstrap(document, ['relayer'], {
         strictDi: true
