@@ -33,7 +33,8 @@ angular.module('relayer')
             })
             .state('users', {
                 url: '/users',
-                template: '<users></users>'
+                template: '<users></users>',
+                resolve: requireLogin
             })
             .state('streamEdit', {
                 url: '/stream/:slug/edit',

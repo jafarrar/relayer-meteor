@@ -66,6 +66,9 @@ angular.module('relayer').directive('streamView', function() {
             };
 
             this.autorun(() => {
+                let key = this.getReactively('stream.streamKey');
+                console.log(key);
+
                 // Reactively check if viewer still have permission to view page
                 let showStream = this.getReactively('stream.public') || false;
 
