@@ -19,24 +19,6 @@ angular.module('relayer').directive('streamView', function() {
                 }
             });
 
-            this.autorun(() => {
-                // Reactively check if viewer still have permission to view page
-                let showStream = this.getReactively('stream.public') || false;
-
-                // Reactively kick user back to login screen if not logged in and the stream isn't public
-                if (angular.isDefined(showStream)) {
-                    if (!Meteor.userId() && showStream === false) {
-                        console.log("stream show check");
-                        $state.go('login');
-                    };
-                }
-
-                // wait for JWPlayer, *usually* also plenty of time for helper to resolve
-                if(JWPlayer.loaded()) {
-                    this.initPlayer();
-                }
-            });
-
             this.initPlayer = () => {
                 let playerInstance = jwplayer('player');
 
@@ -82,6 +64,24 @@ angular.module('relayer').directive('streamView', function() {
                 this.playerInstance.setVolume(this.volume);
                 console.log(this.playerInstance);
             };
+
+            this.autorun(() => {
+                // Reactively check if viewer still have permission to view page
+                let showStream = this.getReactively('stream.public') || false;
+
+                // Reactively kick user back to login screen if not logged in and the stream isn't public
+                if (angular.isDefined(showStream)) {
+                    if (!Meteor.userId() && showStream === false) {
+                        console.log("stream show check");
+                        $state.go('login');
+                    };
+                }
+
+                // wait for JWPlayer, *usually* also plenty of time for helper to resolve
+                if(JWPlayer.loaded()) {
+                    this.initPlayer();
+                }
+            });
 
         }
     }
