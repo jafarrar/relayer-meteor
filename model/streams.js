@@ -47,3 +47,29 @@ Streams.allow({
         return isAdmin(userId);
     }
 });
+
+
+Meteor.methods({
+    updateAppList:function(){
+        HTTP.get(Meteor.settings.public.statUrl,{},
+            function(xmlError,xmlResponse){
+                if(xmlError){
+                    console.error('xmlError',xmlError);
+                }else{
+                    xml2js.parseString(xmlResponse.content, {explicitArray:false, emptyTag:undefined}, function (jsError, jsResult) {
+                    if(jsError){
+                        console.error('xml2js error',jsError);
+                    }else{
+                        let channels = [];
+                        //console.log('jsResult', jsResult.rtmp.server.application);
+                        _.each(jsResult.rtmp.server.application, function(application) {
+                            channels.push(application.name);
+                        })
+                        console.log(channels);
+                        Meteor.settings.public.applicationList = channels;
+                    }
+                });
+            }
+        });
+    }
+});

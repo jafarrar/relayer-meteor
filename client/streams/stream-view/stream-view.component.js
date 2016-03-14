@@ -66,16 +66,12 @@ angular.module('relayer').directive('streamView', function() {
             };
 
             this.autorun(() => {
-                let key = this.getReactively('stream.streamKey');
-                console.log(key);
-
-                // Reactively check if viewer still have permission to view page
+                // Reactively check if viewer still has permission to view page
                 let showStream = this.getReactively('stream.public') || false;
 
-                // Reactively kick user back to login screen if not logged in and the stream isn't public
+                // Kick user back to login screen if not logged in and the stream isn't public
                 if (angular.isDefined(showStream)) {
                     if (!Meteor.userId() && showStream === false) {
-                        console.log("stream show check");
                         $state.go('login');
                     };
                 }

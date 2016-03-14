@@ -50,6 +50,17 @@ angular.module('relayer').directive('streamEdit', function() {
             this.generateStreamKey = () => {
                 this.stream.streamKey = Random.id();
             };
+
+            this.updateChannelList = () => {
+                Meteor.call('updateAppList', (error) => {
+                    if (error) {
+                        console.log("Unable to update  list", error);
+                    }
+                    else {
+                        console.log("List Updated");
+                    }
+                });
+            }
         }
     }
 });

@@ -21,6 +21,7 @@
     <input ng-model="se.stream.public" type="checkbox" />
     <button ng-click="se.updateStream()">Save</button>
     <div ng-show="se.error">
-        {{se.error}}
+        Error: {{se.error}}
     </div>
 </form>
+<button ng-click="se.updateChannelList()">Update List</button>
