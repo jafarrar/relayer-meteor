@@ -1,20 +1,22 @@
 View page: reactive alert if channel or streamKey changes, offer optional refresh button (or reinitialize player) with new key
 Admin function: drop publisher nginx-rtmp https://github.com/arut/nginx-rtmp-module/wiki/Control-module#drop - http://kegwen.com/control/drop/publisher?app={{stream.channel}}&name={{stream.streamKey}}
 Authenticated requests to nginx for control/stats (see: CORS)
+    ^ http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/
 Get list of available channels from nginx-rtmp server
     ^ refactor for multiple uses - generic function for grabbing stats XML, then smaller ones that call it for: number of clients, updating list, maybe bitrate/resolution/etc?
 write some tests, you filth
 Slack hooks (went live etc)
-self-host JWPlayer, adapt jwplayer module principles
-google analytics (including for jwplayer)
+Google analytics (including for jwplayer)
 documentation: settings.json, default admin password, nginx-rtmp setup
 Number of viewers https://github.com/arut/nginx-rtmp-module/wiki/Getting-number-of-subscribers
-    - ^ this "works" now serverside, but always seems to show zero
+    - ^ this "works" now serverside, but always seems to show zero (probably a nginx-rtmp quirk, unsure how to adapt)
+MAYBE: self-host JWPlayer, adapt jwplayer module principles
 .
 .
 .
 .
 UI Goal: no css framework except SASS and maybe a lightweight responsive grid
+Color Palette
 Overall Relayer UI
 Stream List UI
 Stream Edit UI
