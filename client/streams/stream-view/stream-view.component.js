@@ -26,7 +26,7 @@ angular.module('relayer').directive('streamView', function() {
                     file: this.baseUrl + '/' + this.stream.channel + '/' + this.stream.streamKey,
                     width: this.stream.resX,
                     height: this.stream.resY,
-                    volume: this.volume,
+                    volume: this.stream.defaultVolume || this.volume,
                     title: this.stream.name || '',
                     description: this.stream.description || '',
                     autostart: true,

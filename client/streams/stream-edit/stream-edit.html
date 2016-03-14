@@ -17,6 +17,8 @@
     <label>Resolution</label>
     <input ng-model="se.stream.resX" /> x
     <input ng-model="se.stream.resY" />
+    <label>Default Volume</label>
+    <input type="range" ng-model="se.stream.defaultVolume" />
     <label>Public</label>
     <input ng-model="se.stream.public" type="checkbox" />
     <button ng-click="se.updateStream()">Save</button>

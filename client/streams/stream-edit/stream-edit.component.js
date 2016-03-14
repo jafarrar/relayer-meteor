@@ -26,6 +26,7 @@ angular.module('relayer').directive('streamEdit', function() {
                         streamKey: this.stream.streamKey,
                         resX: this.stream.resX,
                         resY: this.stream.resY,
+                        defaultVolume: this.stream.defaultVolume,
                         public: this.stream.public
                     }
                 }, (error) => {
