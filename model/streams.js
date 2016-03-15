@@ -71,5 +71,17 @@ Meteor.methods({
                 });
             }
         });
+    },
+    dropPublisher: function(app, key){
+        console.log(`${Meteor.settings.public.controlUrl}/control/drop/publisher?app=${app}&name=${key}`);
+        HTTP.get(`${Meteor.settings.public.controlUrl}/control/drop/publisher?app=${app}&name=${key}`, {},
+            function(httpError, httpResponse) {
+                if(httpError) {
+                    console.error('httpError', httpError);
+                }
+                else {
+                    return httpResponse;
+                }
+            });
     }
 });

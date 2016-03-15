@@ -61,7 +61,18 @@ angular.module('relayer').directive('streamEdit', function() {
                         console.log("List Updated");
                     }
                 });
-            }
+            };
+
+            this.dropPublisher = () => {
+                Meteor.call('dropPublisher', this.stream.channel, this.stream.streamKey, (error) => {
+                    if (error) {
+                        console.log("Unable to drop publisher", error);
+                    }
+                    else {
+                        console.log("Publisher dropped");
+                    }
+                });
+            };
         }
     }
 });
