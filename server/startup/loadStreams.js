@@ -36,5 +36,6 @@ Meteor.startup(function () {
     }
 
     //load channels/applications from RTMP server
+    Meteor.settings.public.applicationList = [];
     Meteor.call('updateAppList');
 });

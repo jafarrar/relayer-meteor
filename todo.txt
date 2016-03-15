@@ -1,6 +1,4 @@
-Authenticated requests to nginx for control/stats (see: CORS)
-    ^ http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/
-Get list of available channels from nginx-rtmp server
+Authenticated request for /stats (CORS)
     ^ refactor for multiple uses - generic function for grabbing stats XML, then smaller ones that call it for: number of clients, updating list, maybe bitrate/resolution/etc?
 write some tests, you filth
 Slack hooks (went live etc)

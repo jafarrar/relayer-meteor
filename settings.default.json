@@ -5,5 +5,7 @@
         "controlUrl": "http://yourserver.com/control",
         "statUrl": "http://yourserver.com/stat"
     },
-    "baseUserPassword": "abc123"
+    "baseUserPassword": "abc123",
+    "nginxUser": "relayer",
+    "nginxPassword": "yourpassword"
 }

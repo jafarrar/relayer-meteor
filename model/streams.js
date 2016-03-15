@@ -60,28 +60,28 @@ Meteor.methods({
                     if(jsError){
                         console.error('xml2js error',jsError);
                     }else{
-                        let channels = [];
-                        //console.log('jsResult', jsResult.rtmp.server.application);
+                        Meteor.settings.public.applicationList = [];
+
                         _.each(jsResult.rtmp.server.application, function(application) {
-                            channels.push(application.name);
+                            Meteor.settings.public.applicationList.push(application.name);
                         })
-                        console.log(channels);
-                        Meteor.settings.public.applicationList = channels;
+                        console.log(Meteor.settings.public.applicationList);
                     }
                 });
             }
         });
     },
     dropPublisher: function(app, key){
-        console.log(`${Meteor.settings.public.controlUrl}/control/drop/publisher?app=${app}&name=${key}`);
-        HTTP.get(`${Meteor.settings.public.controlUrl}/control/drop/publisher?app=${app}&name=${key}`, {},
-            function(httpError, httpResponse) {
-                if(httpError) {
-                    console.error('httpError', httpError);
-                }
-                else {
-                    return httpResponse;
-                }
-            });
+        console.log(`${Meteor.settings.public.controlUrl}/drop/publisher?app=${app}&name=${key}`);
+
+        try {
+            let result = HTTP.call("GET", `${Meteor.settings.public.controlUrl}/drop/publisher?app=${app}&name=${key}`,
+                                    {params: {user: Meteor.settings.nginxUser, password: Meteor.settings.nginxPassword}});
+            console.log(result);
+            return true;
+        }
+        catch (e) {
+            return false;
+        }
     }
 });
