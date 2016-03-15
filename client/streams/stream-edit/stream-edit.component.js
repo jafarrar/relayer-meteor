@@ -53,11 +53,10 @@ angular.module('relayer').directive('streamEdit', function() {
             };
 
             this.updateChannelList = () => {
-                Meteor.call('updateAppList', (error) => {
+                this.call('updateAppList', (error, result) => {
                     if (error) {
                         console.log("Unable to update  list", error);
-                    }
-                    else {
+                    } else {
                         console.log("List Updated");
                     }
                 });

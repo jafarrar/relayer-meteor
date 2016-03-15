@@ -1,5 +1,6 @@
 Authenticated request for /stats (CORS)
     ^ refactor for multiple uses - generic function for grabbing stats XML, then smaller ones that call it for: number of clients, updating list, maybe bitrate/resolution/etc?
+Remove inactive applications/channels during update
 write some tests, you filth
 Slack hooks (went live etc)
 Google analytics (including for jwplayer)
