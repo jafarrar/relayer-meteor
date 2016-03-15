@@ -7,8 +7,7 @@ angular.module('relayer').directive('relayer', function() {
             $reactive(this).attach($scope);
 
             this.subscribe('users');
-
-            this.streamChannels = Meteor.settings.public.applicationList;
+            this.subscribe('channels');
 
             this.helpers({
                 isLoggedIn: () => {
@@ -16,6 +15,9 @@ angular.module('relayer').directive('relayer', function() {
                 },
                 currentUser: () => {
                     return Meteor.user();
+                },
+                channels: () => {
+                    return Channels.find({});
                 }
             });
 

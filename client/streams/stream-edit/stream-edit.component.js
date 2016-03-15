@@ -73,6 +73,7 @@ angular.module('relayer').directive('streamEdit', function() {
                     }
                 });
             };
+
         }
     }
 });

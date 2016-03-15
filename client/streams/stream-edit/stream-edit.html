@@ -9,7 +9,7 @@
     <label>Channel</label>
     <select ng-model="se.stream.channel" required>
         <option value=""></option>
-        <option ng-repeat="option in vm.streamChannels" value="{{option}}">{{option}}</option>
+        <option ng-repeat="option in vm.channels" value="{{option.name}}">{{option.name}}</option>
     </select>
     <label>Stream Key</label>
     <input ng-model="se.stream.streamKey" />

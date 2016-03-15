@@ -50,27 +50,6 @@ Streams.allow({
 
 
 Meteor.methods({
-    updateAppList:function(){
-        HTTP.get(Meteor.settings.public.statUrl,{},
-            function(xmlError,xmlResponse){
-                if(xmlError){
-                    console.error('xmlError',xmlError);
-                }else{
-                    xml2js.parseString(xmlResponse.content, {explicitArray:false, emptyTag:undefined}, function (jsError, jsResult) {
-                    if(jsError){
-                        console.error('xml2js error',jsError);
-                    }else{
-                        Meteor.settings.public.applicationList = [];
-
-                        _.each(jsResult.rtmp.server.application, function(application) {
-                            Meteor.settings.public.applicationList.push(application.name);
-                        })
-                        console.log(Meteor.settings.public.applicationList);
-                    }
-                });
-            }
-        });
-    },
     dropPublisher: function(app, key){
         console.log(`${Meteor.settings.public.controlUrl}/drop/publisher?app=${app}&name=${key}`);
 
