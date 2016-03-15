@@ -1,4 +1,3 @@
-View page: reactive alert if channel or streamKey changes, offer optional refresh button (or reinitialize player) with new key
 Admin function: drop publisher nginx-rtmp https://github.com/arut/nginx-rtmp-module/wiki/Control-module#drop - http://kegwen.com/control/drop/publisher?app={{stream.channel}}&name={{stream.streamKey}}
 Authenticated requests to nginx for control/stats (see: CORS)
     ^ http://www.jujens.eu/posts/en/2015/Jun/27/webdav-options/

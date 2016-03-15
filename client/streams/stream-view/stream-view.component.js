@@ -7,6 +7,7 @@ angular.module('relayer').directive('streamView', function() {
             $reactive(this).attach($scope);
 
             this.volume = 25;
+            this.streamKeyChanged = false;
 
             this.subscribe('streams');
 
@@ -41,6 +42,7 @@ angular.module('relayer').directive('streamView', function() {
 
             this.resetPlayer = () => {
                 this.initPlayer();
+                this.streamKeyChanged = false;
             };
 
             this.play = () => {
@@ -62,8 +64,19 @@ angular.module('relayer').directive('streamView', function() {
 
             this.setVolume = () => {
                 this.playerInstance.setVolume(this.volume);
-                console.log(this.playerInstance);
             };
+
+            $scope.$watch(
+                // Watch the streamKey, allows app to prompt user to reinitialize player if necessary
+                watchStreamKey = () => {
+                    return this.getReactively('stream.streamKey');
+                },
+                handleStreamKeyChange = (newValue, oldValue) => {
+                    // ignore the initial undefined period as this.stream resolves
+                    if(oldValue != undefined)
+                        this.streamKeyChanged = true;
+                }
+            )
 
             this.autorun(() => {
                 // Reactively check if viewer still has permission to view page
