@@ -1,5 +1,9 @@
 Channels = new Mongo.Collection("channels");
 
+// Retrieve the channel/application list from nginx-rtmp's stat module
+// Parse the XML, then add the channels to the db
+// In the future, this should also (optionally?) prune or at least flag inactivate channels
+// Reference: http://stackoverflow.com/questions/29184651/how-to-parse-xml-in-meteor-backend/34007083#34007083
 Meteor.methods({
     updateAppList:function(){
         HTTP.get(Meteor.settings.public.statUrl,{},
