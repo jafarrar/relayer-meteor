@@ -52,6 +52,15 @@ angular.module('relayer').directive('streamEdit', function() {
                 }
             };
 
+            this.autorun(() => {
+                try {
+                    this.aspectRatio = Streams.getAspectRatio(this.getReactively('stream.resX'), this.getReactively('stream.resY'));
+                } catch (e) {
+                    this.aspectRatio = '16:9';
+                    console.log(e);
+                }
+            })
+
             this.generateStreamKey = () => {
                 this.stream.streamKey = Random.id();
             };
@@ -67,7 +76,10 @@ angular.module('relayer').directive('streamEdit', function() {
             };
 
             this.dropPublisher = () => {
-                Meteor.call('dropPublisher', this.stream.channel, this.stream.streamKey, (error) => {
+                if(!confirm("Kill the stream?")) {
+                    return false;
+                }
+                this.call('dropPublisher', this.stream.channel, this.stream.streamKey, (error) => {
                     if (error) {
                         console.log("Unable to drop publisher", error);
                     }

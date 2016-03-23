@@ -1,23 +1,64 @@
 <div class="container">
-    <h2>Users</h2>
-    <button ng-click="ua.showAddUserForm = !ua.showAddUserForm" ng-show="!ua.showAddUserForm">Add New User</button>
-    <form ng-show="ua.showAddUserForm" name="new-user">
-        <label>Email</label>
-        <input ng-model="ua.credentials.email" type="email" name="email" required />
-        <label>Password</label>
-        <input ng-model="ua.credentials.password" type="text" name="newpw" required />
-        <button ng-click="ua.generatePassword()" type="button" name="generate">Generate Password</button>
-        <button ng-click="ua.createUser()" type="submit">Add</button>
-    </form>
-    <p>{{ua.users}}</p>
-    <ul>
-        <li ng-repeat="user in ua.users">
-            {{ user | displayName }}
-            {{user.asdf}}
-            <label>Admin</label>
-            <button ng-hide="user.isAdmin" ng-click="ua.setAdmin(user)">Promote to Admin</button>
-            <button ng-show="user.isAdmin" ng-click="ua.revokeAdmin(user)">Revoke Admin</button>
-            <button ng-click="ua.removeUser(user)">Delete</button>
-        </li>
-    </ul>
+    <div class="list-head">
+        <h1>Users List</h1>
+        <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#newUserModal">New User</button>
+    </div>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Status Controls</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="user in ua.users">
+            <td>{{ user | displayName }}</td>
+            <td ng-if="user.isAdmin">Admin</td>
+            <td ng-if="!user.isAdmin">Member</td>
+            <td>
+                <button ng-hide="user.isAdmin" ng-click="ua.setAdmin(user)" class="btn btn-default">Promote to Admin</button>
+                <button ng-show="user.isAdmin" ng-click="ua.revokeAdmin(user)" class="btn btn-default">Revoke Admin</button>
+            </td>
+            <td>
+                <button ng-click="ua.removeUser(user)" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="modal fade" id="newUserModal" tab-index="-1" role="dialog" aria-labelledby="New User">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form name="new-user" class="form-horizontal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>New User</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input ng-model="ua.credentials.email" type="email" name="email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input ng-model="ua.credentials.password" type="text" name="newpw" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" ng-show="ua.activeError">
+                        {{ ua.error }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button ng-click="ua.generatePassword()" type="button" name="generate" class="btn btn-default">Generate Password</button>
+                    <button ng-click="ua.createUser()" class="btn btn-primary">Add User</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

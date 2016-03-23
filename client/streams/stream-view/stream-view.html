@@ -3,18 +3,16 @@
 </div>
 <h2>Stream View</h2>
 <h3>{{sv.stream.name}}</h3>
-<div class="embed-responsive embed-responsive-16by9">
-    <div id="player"></div>
-    <form class="form-inline">
-        <button ng-click="sv.play()" class="btn btn-default"><span class="glyphicon glyphicon-play"></span></button>
-        <button ng-click="sv.pause()" class="btn btn-default"><span class="glyphicon glyphicon-pause"></span></button>
-        <button ng-click="sv.stop()" class="btn btn-default"><span class="glyphicon glyphicon-stop"></span></button>
-        <button ng-if="vm.currentUser.isAdmin" ng-click="sv.resetPlayer()" class="btn btn-warning">Reset Player</button>
-        <button ng-if="vm.currentUser.isAdmin" ui-sref="streamEdit({slug: sv.stream.slug})" class="btn btn-default">Edit Stream</button>
-        <label>Volume</label>
-        <input type="range" ng-model="sv.volume" ng-change="sv.setVolume()" />
-        <button ng-click="sv.mute()" class="btn" ng-class="{'btn-info': sv.volume === 0, 'btn-default': sv.volume > 0}">
-            <span class="glyphicon" ng-class="{'glyphicon-volume-off': sv.volume === 0, 'glyphicon-volume-up': sv.volume > 0 }"></span>
-        </button>
-    </form>
-</div>
+<div id="player"></div>
+<form class="form-inline">
+    <button ng-click="sv.play()" class="btn btn-default"><span class="glyphicon glyphicon-play"></span></button>
+    <button ng-click="sv.pause()" class="btn btn-default"><span class="glyphicon glyphicon-pause"></span></button>
+    <button ng-click="sv.stop()" class="btn btn-default"><span class="glyphicon glyphicon-stop"></span></button>
+    <button ng-if="vm.currentUser.isAdmin" ng-click="sv.resetPlayer()" class="btn btn-warning">Reset Player</button>
+    <button ng-if="vm.currentUser.isAdmin" ui-sref="streamEdit({slug: sv.stream.slug})" class="btn btn-default">Edit Stream</button>
+    <label>Volume</label>
+    <input type="range" ng-model="sv.volume" ng-change="sv.setVolume()" />
+    <button ng-click="sv.mute()" class="btn" ng-class="{'btn-info': sv.volume === 0, 'btn-default': sv.volume > 0}">
+        <span class="glyphicon" ng-class="{'glyphicon-volume-off': sv.volume === 0, 'glyphicon-volume-up': sv.volume > 0 }"></span>
+    </button>
+</form>

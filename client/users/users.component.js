@@ -11,7 +11,8 @@ angular.module('relayer').directive('users', function() {
                 password: ''
             };
 
-            this.showAddUserForm = false;
+            this.error = {};
+            this.activeError = false;
 
             this.subscribe('users');
 
@@ -22,17 +23,19 @@ angular.module('relayer').directive('users', function() {
             });
 
             this.createUser = () => {
-                Meteor.call('addUser', this.credentials, (error) => {
+                this.call('addUser', this.credentials, (error, result) => {
                     if (error) {
-                        console.log("Unable to add user");
+                        console.log("Unable to add user", error);
+                        this.error = error.reason;
+                        this.activeError = true;
                     }
                     else {
-                        console.log("User added");
+                        console.log("User added", result);
+                        this.activeError = false;
+                        this.error = {};
+                        this.credentials = {};
                     }
                 });
-
-                this.credentials = {};
-                this.showAddUserForm = false;
             };
 
             this.removeUser = (user) => {

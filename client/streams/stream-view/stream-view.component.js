@@ -25,8 +25,8 @@ angular.module('relayer').directive('streamView', function() {
 
                 let playerOptions = {
                     file: this.baseUrl + '/' + this.stream.channel + '/' + this.stream.streamKey,
-                    width: this.stream.resX,
-                    height: this.stream.resY,
+                    aspectratio: Streams.getAspectRatio(this.stream.resX, this.stream.resY),
+                    width: this.playerWidth(),
                     volume: this.stream.defaultVolume || this.volume,
                     title: this.stream.name || '',
                     description: this.stream.description || '',
@@ -38,7 +38,14 @@ angular.module('relayer').directive('streamView', function() {
                 this.playerInstance = playerInstance;
 
                 playerInstance.setup(playerOptions);
-                console.log(playerInstance);
+            };
+
+            this.playerWidth = () => {
+                if (Streams.getAspectRatio(this.stream.resX, this.stream.resY) != '16:9') {
+                    return "15%"
+                } else {
+                    return "75%"
+                }
             };
 
             this.resetPlayer = () => {
@@ -80,24 +87,25 @@ angular.module('relayer').directive('streamView', function() {
                 },
                 handleStreamKeyChange = (newValue, oldValue) => {
                     // ignore the initial undefined period as this.stream resolves
-                    if(oldValue != undefined)
+                    if(oldValue != undefined && oldValue != newValue)
                         this.streamKeyChanged = true;
                 }
             )
 
-            this.autorun(() => {
-                // Reactively check if viewer still has permission to view page
-                let showStream = this.getReactively('stream.public') || false;
-
-                // Kick user back to login screen if not logged in and the stream isn't public
-                if (angular.isDefined(showStream)) {
-                    if (!Meteor.userId() && showStream === false) {
+            // Kick user back to login screen if not logged in and the stream isn't public
+            $scope.$watch(
+                watchPublic = () => {
+                    return this.getReactively('stream.public');
+                },
+                handlePublicChange = (newValue, oldValue) => {
+                    if (newValue === false)
                         $state.go('login');
-                    };
                 }
+            )
 
+            this.autorun(() => {
                 // wait for JWPlayer, *usually* also plenty of time for helper to resolve
-                if(JWPlayer.loaded()) {
+                if(JWPlayer.loaded() && this.stream.streamKey) {
                     this.initPlayer();
                 }
             });

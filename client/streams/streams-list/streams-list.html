@@ -1,11 +1,7 @@
 <div class="container">
-    <div class="col-xs-10">
+    <div class="list-head">
         <h1>Streams List</h1>
-    </div>
-    <div class="col-xs-2">
-        <div ng-if="vm.currentUser.isAdmin" class="col-sm-8 col-sm-offset-2">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#newStreamModal">New Stream</button>
-        </div>
+        <button ng-if="vm.currentUser.isAdmin" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#newStreamModal">New Stream</button>
     </div>
 
     <table class="table table-striped">

@@ -1,8 +1,14 @@
-<h2>Register</h2>
-<form>
-    <label>Email</label>
-    <input ng-model="reg.credentials.email" type="email" />
-    <label>Password</label>
-    <input ng-model="reg.credentials.password" type="password" />
-    <button ng-click="reg.register()">Login</button>
-</form>
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>Relayer</h1>
+        <h2>Register</h2>
+        <p>Registration is disabled.</p>
+        <form class="form-horizontal">
+            <label class="control-label">Email</label>
+            <input ng-model="reg.credentials.email" type="email" class="form-control" disabled />
+            <label class="control-label">Password</label>
+            <input ng-model="reg.credentials.password" type="password" class="form-control" disabled />
+            <button ng-click="reg.register()" class="btn btn-primary register-button">Register</button>
+        </form>
+    </div>
+</div>

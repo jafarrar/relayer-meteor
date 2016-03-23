@@ -1,8 +1,13 @@
-<h2>Login</h2>
-<form>
-    <label>Email</label>
-    <input ng-model="login.credentials.email" type="email" />
-    <label>Password</label>
-    <input ng-model="login.credentials.password" type="password" />
-    <button ng-click="login.login()">Login</button>
-</form>
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>Relayer</h1>
+        <h2>Login</h2>
+        <form class="form-horizontal">
+            <label class="control-label">Email</label>
+            <input ng-model="login.credentials.email" type="email" class="form-control" />
+            <label class="control-label">Password</label>
+            <input ng-model="login.credentials.password" type="password" class="form-control"/>
+            <button ng-click="login.login()" class="btn btn-primary login-button">Login</button>
+        </form>
+    </div>
+</div>

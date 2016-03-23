@@ -1,4 +1,19 @@
-Streams = new Mongo.Collection("streams");
+class StreamsCollection extends Mongo.Collection {
+    getAspectRatio(width, height) {
+        if(!width || !height)
+            return '16:9';
+
+        gcd = (a, b) => {
+            return (b == 0) ? a : gcd (b, a%b);
+        };
+
+        let r = gcd(width, height);
+        let aspectRatio = `${width / r}:${height / r}`;
+        return aspectRatio;
+    }
+}
+
+Streams = new StreamsCollection("streams");
 
 isAdmin = (userId) => {
     let user = Meteor.users.findOne(userId);

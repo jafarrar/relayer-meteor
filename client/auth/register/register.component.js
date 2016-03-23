@@ -14,14 +14,15 @@ angular.module('relayer').directive('register', function() {
             this.error = '';
 
             this.register = () => {
-                Accounts.createUser(this.credentials, (err) => {
-                    if (err) {
-                        this.error = err;
-                    }
-                    else {
-                        $state.go('login');
-                    }
-                });
+                console.log("Registration disabled.");
+                //Accounts.createUser(this.credentials, (err) => {
+                //    if (err) {
+                //        this.error = err;
+                //    }
+                //    else {
+                //        $state.go('home');
+                //    }
+                //});
             };
 
         }
