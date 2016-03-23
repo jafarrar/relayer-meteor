@@ -1,34 +1,86 @@
-<h2>Streams List</h2>
-<ul>
-    <li ng-repeat="stream in sl.streams">
-        {{stream.name}}
-        <button ui-sref="streamView({slug: stream.slug})">View</button>
-        <span ng-if="vm.currentUser.isAdmin">
-            <button ui-sref="streamEdit({slug: stream.slug})">Edit</button>
-            <button ng-click="sl.removeStream(stream)">Remove</button>
-        </span>
-    </li>
-</ul>
-<div ng-if="vm.currentUser.isAdmin">
-<h3>New Stream</h3>
-    <form name="new-stream">
-        <label>Name</label>
-        <input ng-model="sl.newStream.name" type="text" name="streamName" />
-        <label>Slug</label>
-        <input ng-model="sl.newStream.slug" type="text" name="streamSlug" disabled />
-        <label>Description</label>
-        <input ng-model="sl.newStream.description" name="streamDescription" type="text" />
-        <label>Channel</label>
-        <select ng-model="sl.newStream.channel">
-            <option value=""></option>
-            <option ng-repeat="option in vm.channels" value="{{option.name}}">{{option.name}}</option>
-        </select>
-        <label>Resolution</label>
-        <input ng-model="sl.newStream.resX" /> x
-        <input ng-model="sl.newStream.resY" />
-        <button ng-click="sl.addStream()">Add Stream</button>
-        <div ng-show="sl.error">
-            {{ sl.error }}
+<div class="container">
+    <div class="col-xs-10">
+        <h1>Streams List</h1>
+    </div>
+    <div class="col-xs-2">
+        <div ng-if="vm.currentUser.isAdmin" class="col-sm-8 col-sm-offset-2">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#newStreamModal">New Stream</button>
         </div>
-    </form>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Stream</th>
+                <th>Action</th>
+                <th ng-if="vm.currentUser.isAdmin">Controls</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="stream in sl.streams">
+            <td>{{stream.name}}</td>
+            <td><button ui-sref="streamView({slug: stream.slug})" class="btn btn-primary">View</button></td>
+            <td ng-if="vm.currentUser.isAdmin">
+                <button ui-sref="streamEdit({slug: stream.slug})" class="btn btn-default">Edit</button>
+                <button ng-click="sl.removeStream(stream)" class="btn btn-danger">Remove</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="modal fade" id="newStreamModal" tab-index="-1" role="dialog" aria-labelledby="New Stream">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form name="new-stream" class="form-horizontal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>New Stream</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input ng-model="sl.newStream.name" type="text" name="streamName" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Slug</label>
+                        <div class="col-sm-10">
+                            <input ng-model="sl.newStream.slug" type="text" name="streamSlug" disabled class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
+                            <input ng-model="sl.newStream.description" name="streamDescription" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Channel</label>
+                        <div class="col-sm-10">
+                            <select ng-model="sl.newStream.channel" class="form-control">
+                                <option value=""></option>
+                                <option ng-repeat="option in vm.channels" value="{{option.name}}">{{option.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-12 control-label">Resolution</label>
+                        <div class="col-sm-5 col-xs-6">
+                            <input ng-model="sl.newStream.resX" class="form-control" />
+                        </div>
+                        <div class="col-sm-5 col-xs-6">
+                            <input ng-model="sl.newStream.resY" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" ng-show="sl.activeError">
+                        {{ sl.error }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button ng-click="sl.addStream()" class="btn btn-primary">Add Stream</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

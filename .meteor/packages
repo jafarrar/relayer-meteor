@@ -24,3 +24,5 @@ jeremy:jwplayer
 check
 peerlibrary:xml2js
 http
+twbs:bootstrap
+fourseven:scss

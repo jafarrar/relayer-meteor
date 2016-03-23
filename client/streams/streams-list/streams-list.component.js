@@ -12,7 +12,8 @@ angular.module('relayer').directive('streamsList', function() {
                 'resY': 720
             };
 
-            this.error = "";
+            this.error = {};
+            this.activeError = false;
 
             this.subscribe('streams');
 
@@ -34,16 +35,21 @@ angular.module('relayer').directive('streamsList', function() {
                     Streams.insert(this.newStream,
                         (error, result) => {
                             if (error) {
-                                console.log(error)
+                                console.log(error);
+                                this.error = error.reason;
+                                this.activeError = true;
                             }
                             if (result) {
                                 console.log(result);
+                                this.newStream = {};
+                                this.error = {};
+                                this.activeError = true;
                             }
                     });
-                    this.newStream = {};
                 }
                 else {
                     this.error = "Please complete the form before submitting.";
+                    this.activeError = true;
                 }
 
             };

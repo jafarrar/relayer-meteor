@@ -9,6 +9,7 @@ angular.module('relayer').directive('streamEdit', function() {
             this.subscribe('streams');
 
             this.error = {};
+            this.activeError = false;
 
             this.helpers({
                 stream: () => {
@@ -27,15 +28,18 @@ angular.module('relayer').directive('streamEdit', function() {
                         resX: this.stream.resX,
                         resY: this.stream.resY,
                         defaultVolume: this.stream.defaultVolume,
-                        public: this.stream.public
+                        public: this.stream.public,
+                        autoplay: this.stream.autoplay
                     }
                 }, (error) => {
                     if (error) {
                         this.error = error.reason;
+                        this.activeError = true;
                         console.log("Unable to update the stream", error);
                     }
                     else {
                         this.error = {};
+                        this.activeError = false;
                         console.log("Stream updated.");
                     }
                 });

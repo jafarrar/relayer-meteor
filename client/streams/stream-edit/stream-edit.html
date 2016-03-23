@@ -1,30 +1,81 @@
-<h2>Edit Stream</h2>
-<form>
-    <label>Name</label>
-    <input ng-model="se.stream.name" />
-    <label>Slug</label>
-    <input ng-model="se.stream.slug" />
-    <label>Description</label>
-    <input ng-model="se.stream.description" />
-    <label>Channel</label>
-    <select ng-model="se.stream.channel" required>
-        <option value=""></option>
-        <option ng-repeat="option in vm.channels" value="{{option.name}}">{{option.name}}</option>
-    </select>
-    <label>Stream Key</label>
-    <input ng-model="se.stream.streamKey" />
-    <button ng-click="se.generateStreamKey()">Generate new key</button>
-    <label>Resolution</label>
-    <input ng-model="se.stream.resX" /> x
-    <input ng-model="se.stream.resY" />
-    <label>Default Volume</label>
-    <input type="range" ng-model="se.stream.defaultVolume" />
-    <label>Public</label>
-    <input ng-model="se.stream.public" type="checkbox" />
-    <button ng-click="se.updateStream()">Save</button>
-    <div ng-show="se.error">
-        Error: {{se.error}}
+<div class="container">
+    <h2>Edit Stream</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">{{se.stream.name}}</div>
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input ng-model="se.stream.name" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Slug</label>
+                    <div class="col-sm-10">
+                        <input ng-model="se.stream.slug" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        <input ng-model="se.stream.description" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Channel</label>
+                    <div class="col-sm-10">
+                        <select ng-model="se.stream.channel" class="form-control" required>
+                            <option value=""></option>
+                            <option ng-repeat="option in vm.channels" value="{{option.name}}">{{option.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Stream Key</label>
+                    <div class="col-sm-10">
+                        <input ng-model="se.stream.streamKey" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-xs-12 control-label">Resolution</label>
+                    <div class="col-sm-5 col-xs-6">
+                        <input ng-model="se.stream.resX" class="form-control" />
+                    </div>
+                    <div class="col-sm-5 col-xs-6">
+                        <input ng-model="se.stream.resY" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Default Volume</label>
+                    <div class="col-sm-10">
+                        <input type="range" ng-model="se.stream.defaultVolume" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Public</label>
+                    <div class="col-sm-10">
+                        <input ng-model="se.stream.public" type="checkbox" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Autoplay</label>
+                    <div class="col-sm-10">
+                        <input ng-model="se.stream.autoplay" type="checkbox" />
+                    </div>
+                </div>
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button ng-click="se.generateStreamKey()" class="btn btn-warning">Generate New Stream Key</button>
+                    <button ui-sref="streamView({slug: se.stream.slug})" class="btn btn-default">View Stream</button>
+                    <button ng-click="se.updateStream()" class="btn btn-primary">Save</button>
+                    <div ng-show="se.activeError" class="alert alert-danger">
+                        Error: {{se.error}}
+                    </div>
+                </div>
+            </form>
+            <button ng-click="se.updateChannelList()">Update List</button>
+            <button ng-click="se.dropPublisher()">Drop Publisher</button>
+        </div>
     </div>
-</form>
-<button ng-click="se.updateChannelList()">Update List</button>
-<button ng-click="se.dropPublisher()">Drop Publisher</button>
+
+</div>

@@ -30,7 +30,7 @@ angular.module('relayer').directive('streamView', function() {
                     volume: this.stream.defaultVolume || this.volume,
                     title: this.stream.name || '',
                     description: this.stream.description || '',
-                    autostart: true,
+                    autostart: this.stream.autoplay || false,
                     controls: false
                 };
 
@@ -38,6 +38,7 @@ angular.module('relayer').directive('streamView', function() {
                 this.playerInstance = playerInstance;
 
                 playerInstance.setup(playerOptions);
+                console.log(playerInstance);
             };
 
             this.resetPlayer = () => {
@@ -58,8 +59,14 @@ angular.module('relayer').directive('streamView', function() {
             };
 
             this.mute = () => {
-                this.volume = 0;
-                this.playerInstance.setMute();
+                if (this.volume != 0) {
+                    this.previousVolume = this.volume;
+                    this.volume = 0;
+                    this.playerInstance.setMute();
+                } else {
+                    this.volume = this.previousVolume || 25;
+                    this.playerInstance.setVolume(this.volume);
+                }
             };
 
             this.setVolume = () => {
