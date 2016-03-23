@@ -7,6 +7,12 @@ Meteor.users.allow({
     }
 });
 
+Meteor.users.deny({
+    update: function(userId, user) {
+        return !user.isAdmin;
+    }
+});
+
 Meteor.methods({
     addUser: function(newUser) {
         check(newUser, {
