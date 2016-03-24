@@ -53,18 +53,13 @@ angular.module('relayer').directive('users', function() {
                 });
             };
 
-            this.setAdmin = (user) => {
-                Meteor.users.update(user._id, {
-                    $set: {
-                        isAdmin: true
+            this.setAdmin = (targetUser) => {
+                this.call('toggleAdmin', targetUser._id, Meteor.userId(), (error, result) => {
+                    if (error) {
+                        console.log("Unable to update user", error);
                     }
-                });
-            };
-
-            this.revokeAdmin = (user) => {
-                Meteor.users.update(user._id, {
-                    $set: {
-                        isAdmin: false
+                    else {
+                        console.log("User updated", result);
                     }
                 });
             };

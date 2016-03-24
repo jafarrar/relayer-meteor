@@ -2,8 +2,8 @@ var app = angular.module('relayer', []);
 
 angular.module('relayer', [
     'angular-meteor',
-    'ui.router',
-    'accounts.ui'
+    'angular-meteor.auth',
+    'ui.router'
 ]);
 
 function onReady() {

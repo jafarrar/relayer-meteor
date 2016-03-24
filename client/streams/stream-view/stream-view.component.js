@@ -105,9 +105,14 @@ angular.module('relayer').directive('streamView', function() {
 
             this.autorun(() => {
                 // wait for JWPlayer, *usually* also plenty of time for helper to resolve
-                if(JWPlayer.loaded() && this.stream.streamKey) {
-                    this.initPlayer();
+                try {
+                    if(JWPlayer.loaded() && this.stream.streamKey) {
+                        this.initPlayer();
+                    }
+                } catch(e) {
+                    console.info("Slow initialization");
                 }
+
             });
 
         }

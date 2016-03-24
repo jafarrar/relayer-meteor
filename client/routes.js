@@ -1,12 +1,14 @@
 let requireLogin = {
-    currentUser: ($q) => {
+    currentUser: ['$q', function($q) {
         if (Meteor.userId() == null) {
+            console.log("null");
             return $q.reject('AUTH_REQUIRED');
         }
         else {
+            console.log("not null");
             return $q.resolve();
         }
-    }
+    }]
 };
 
 angular.module('relayer')

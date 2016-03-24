@@ -17,6 +17,7 @@ angular.module('relayer').directive('login', function() {
                 Meteor.loginWithPassword(this.credentials.email, this.credentials.password, (err) => {
                     if (err) {
                         this.error = err;
+                        console.log(err);
                     }
                     else {
                         $state.go('home');

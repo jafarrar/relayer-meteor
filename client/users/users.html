@@ -3,7 +3,7 @@
         <h1>Users List</h1>
         <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#newUserModal">New User</button>
     </div>
-    
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -19,7 +19,7 @@
             <td ng-if="!user.isAdmin">Member</td>
             <td>
                 <button ng-hide="user.isAdmin" ng-click="ua.setAdmin(user)" class="btn btn-default">Promote to Admin</button>
-                <button ng-show="user.isAdmin" ng-click="ua.revokeAdmin(user)" class="btn btn-default">Revoke Admin</button>
+                <button ng-if="user.isAdmin" ng-click="ua.setAdmin(user)" class="btn btn-default">Revoke Admin</button>
             </td>
             <td>
                 <button ng-click="ua.removeUser(user)" class="btn btn-danger">Delete</button>

@@ -31,8 +31,6 @@ Meteor.methods({
 
         let user = Meteor.users.findOne({_id: userId});
 
-        console.log(user);
-
         if (!user)
             throw new Meteor.Error(404, "No such user");
 
@@ -42,30 +40,34 @@ Meteor.methods({
         Meteor.users.remove(userId);
     },
 
-    setAdmin: function(userId) {
-        check(userId, String);
+    toggleAdmin: function(targetUserId, currentUserId) {
+        check(targetUserId, String);
+        check(currentUserId, String);
 
-        let user = Meteor.users.findOne({_id: userId});
+        let targetUser = Meteor.users.findOne({_id: targetUserId});
+        let currentUser = Meteor.users.findOne({_id: currentUserId});
 
-        if (!user)
+        if (!targetUser)
             throw new Meteor.Error(404, "No such user");
 
-        console.log("hello", user);
+        if (!currentUser)
+            throw new Meteor.Error(404, "You aren't logged in");
 
-        if (!user.isAdmin) {
-            Meteor.users.update(userId, {
+        if (!currentUser.isAdmin)
+            throw new Meteor.Error(404, "Insufficient privileges");
+
+        if (!targetUser.isAdmin) {
+            Meteor.users.update(targetUserId, {
                 $set: {
                     isAdmin: true
                 }
             });
-        }
-        else {
-            Meteor.users.update(userId, {
+        } else {
+            Meteor.users.update(targetUserId, {
                 $set: {
                     isAdmin: false
                 }
             });
         }
-
     }
 });
