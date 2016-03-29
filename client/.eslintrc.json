@@ -1,0 +1,14 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "meteor": true
+  },
+  "plugins": [
+    "import"
+  ],
+  "globals": {
+    "angular": false,
+    "_": true
+  }
+}
