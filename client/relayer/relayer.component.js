@@ -1,4 +1,4 @@
-angular.module('relayer').directive('relayer', function() {
+angular.module('relayer').directive('relayer', () => {
     return {
         restrict: 'E',
         templateUrl: 'client/relayer/relayer.html',
@@ -24,7 +24,7 @@ angular.module('relayer').directive('relayer', function() {
             this.logout = () => {
                 Accounts.logout();
                 $state.go('login');
-            }
+            };
         }
-    }
+    };
 });

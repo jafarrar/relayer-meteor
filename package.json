@@ -1,0 +1,25 @@
+{
+  "name": "relayer",
+  "version": "1.0.1",
+  "description": "A simple Angular-Meteor application for managing nginx-rtmp streams.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kegwen/relayer.git"
+  },
+  "author": "Andrew Farrar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kegwen/relayer/issues"
+  },
+  "homepage": "https://github.com/kegwen/relayer#readme",
+  "devDependencies": {
+    "eslint": "^2.5.3",
+    "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-meteor": "^3.4.0",
+    "eslint-plugin-react": "^4.2.3"
+  }
+}

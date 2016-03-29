@@ -1,9 +1,9 @@
-angular.module('relayer').directive('streamView', function() {
+angular.module('relayer').directive('streamView', () => {
     return {
         restrict: 'E',
         templateUrl: 'client/streams/stream-view/stream-view.html',
         controllerAs: 'sv',
-        controller: function($scope, $stateParams, $reactive, $state) {
+        controller: function ($scope, $stateParams, $reactive, $state) {
             $reactive(this).attach($scope);
 
             this.volume = 25;
@@ -21,10 +21,10 @@ angular.module('relayer').directive('streamView', function() {
             });
 
             this.initPlayer = () => {
-                let playerInstance = jwplayer('player');
+                const playerInstance = jwplayer('player');
 
                 let playerOptions = {
-                    file: this.baseUrl + '/' + this.stream.channel + '/' + this.stream.streamKey,
+                    file: `${this.baseUrl}/${this.stream.channel}/${this.stream.streamKey}`,
                     aspectratio: Streams.getAspectRatio(this.stream.resX, this.stream.resY),
                     width: this.playerWidth(),
                     volume: this.stream.defaultVolume || this.volume,
@@ -41,11 +41,10 @@ angular.module('relayer').directive('streamView', function() {
             };
 
             this.playerWidth = () => {
-                if (Streams.getAspectRatio(this.stream.resX, this.stream.resY) != '16:9') {
-                    return "15%"
-                } else {
-                    return "75%"
+                if (Streams.getAspectRatio(this.stream.resX, this.stream.resY) !== '16:9') {
+                    return '15%';
                 }
+                return '75%';
             };
 
             this.resetPlayer = () => {
@@ -66,7 +65,7 @@ angular.module('relayer').directive('streamView', function() {
             };
 
             this.mute = () => {
-                if (this.volume != 0) {
+                if (this.volume !== 0) {
                     this.previousVolume = this.volume;
                     this.volume = 0;
                     this.playerInstance.setMute();
@@ -90,7 +89,7 @@ angular.module('relayer').directive('streamView', function() {
                     if(oldValue != undefined && oldValue != newValue)
                         this.streamKeyChanged = true;
                 }
-            )
+            );
 
             // Kick user back to login screen if not logged in and the stream isn't public
             $scope.$watch(
@@ -98,23 +97,22 @@ angular.module('relayer').directive('streamView', function() {
                     return this.getReactively('stream.public');
                 },
                 handlePublicChange = (newValue, oldValue) => {
-                    if (newValue === false)
+                    if (newValue === false) {
                         $state.go('login');
+                    }
                 }
-            )
+            );
 
             this.autorun(() => {
                 // wait for JWPlayer, *usually* also plenty of time for helper to resolve
                 try {
-                    if(JWPlayer.loaded() && this.stream.streamKey) {
+                    if (JWPlayer.loaded() && this.stream.streamKey) {
                         this.initPlayer();
                     }
-                } catch(e) {
-                    console.info("Slow initialization");
+                } catch (e) {
+                    console.info('Slow initialization');
                 }
-
             });
-
         }
-    }
+    };
 });

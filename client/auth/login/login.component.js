@@ -1,4 +1,4 @@
-angular.module('relayer').directive('login', function() {
+angular.module('relayer').directive('login', () => {
     return {
         restrict: 'E',
         templateUrl: 'client/auth/login/login.html',
@@ -17,9 +17,7 @@ angular.module('relayer').directive('login', function() {
                 Meteor.loginWithPassword(this.credentials.email, this.credentials.password, (err) => {
                     if (err) {
                         this.error = err;
-                        console.log(err);
-                    }
-                    else {
+                    } else {
                         $state.go('home');
                     }
                 });

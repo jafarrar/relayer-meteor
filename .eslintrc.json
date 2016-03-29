@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "meteor": true,
+    "mongo": true
+  },
+  "globals": {
+    "Streams": true,
+    "Channels": true,
+    "xml2js": true,
+    "angular": true,
+    "JWPlayer": true,
+    "BrowserPolicy": true
+  },
+  "plugins": [
+    "meteor"
+  ],
+  "extends": [
+    "airbnb/base",
+    "plugin:meteor/guide",
+    "plugin:meteor/recommended"
+  ],
+  "rules": {
+    "indent": ["error", 4 ],
+    "arrow-body-style": ["error", "always"],
+    "comma-dangle": 0
+  }
+}

@@ -3,11 +3,11 @@ Meteor.startup(function () {
         let firstUser = {
             email: 'test@test.cool',
             password: Meteor.settings.baseUserPassword
-        }
+        };
 
         Accounts.createUser(firstUser);
 
-        let firstUserId = Meteor.users.findOne({});
+        const firstUserId = Meteor.users.findOne({});
 
         Meteor.users.update(firstUserId._id, {
             $set: {

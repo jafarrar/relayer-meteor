@@ -1,4 +1,4 @@
-angular.module('relayer').directive('users', function() {
+angular.module('relayer').directive('users', () => {
     return {
         restrict: 'E',
         templateUrl: 'client/users/users.html',
@@ -23,14 +23,11 @@ angular.module('relayer').directive('users', function() {
             });
 
             this.createUser = () => {
-                this.call('addUser', this.credentials, (error, result) => {
+                this.call('addUser', this.credentials, (error) => {
                     if (error) {
-                        console.log("Unable to add user", error);
                         this.error = error.reason;
                         this.activeError = true;
-                    }
-                    else {
-                        console.log("User added", result);
+                    } else {
                         this.activeError = false;
                         this.error = {};
                         this.credentials = {};
@@ -39,35 +36,34 @@ angular.module('relayer').directive('users', function() {
             };
 
             this.removeUser = (user) => {
-                if(!confirm("Remove user?")) {
+                if (!confirm('Remove user?')) {
                     return false;
                 }
 
                 Meteor.call('removeUser', user._id, (error) => {
                     if (error) {
-                        console.log("Unable to remove user", error);
-                    }
-                    else {
-                        console.log("User removed");
+                        this.error = error.reason;
+                    } else {
+                        this.error = {};
                     }
                 });
+
+                return true;
             };
 
             this.setAdmin = (targetUser) => {
-                this.call('toggleAdmin', targetUser._id, Meteor.userId(), (error, result) => {
+                this.call('toggleAdmin', targetUser._id, Meteor.userId(), (error) => {
                     if (error) {
-                        console.log("Unable to update user", error);
-                    }
-                    else {
-                        console.log("User updated", result);
+                        this.error = error.reason;
+                    } else {
+                        this.error = {};
                     }
                 });
             };
 
             this.generatePassword = () => {
                 this.credentials.password = Random.id(12);
-            }
-
+            };
         }
-    }
-})
+    };
+});

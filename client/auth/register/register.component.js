@@ -1,9 +1,9 @@
-angular.module('relayer').directive('register', function() {
+angular.module('relayer').directive('register', () => {
     return {
         restrict: 'E',
         templateUrl: 'client/auth/register/register.html',
         controllerAs: 'reg',
-        controller: function ($scope, $reactive, $state) {
+        controller: function($scope, $reactive) {
             $reactive(this).attach($scope);
 
             this.credentials = {
@@ -14,17 +14,16 @@ angular.module('relayer').directive('register', function() {
             this.error = '';
 
             this.register = () => {
-                console.log("Registration disabled.");
-                //Accounts.createUser(this.credentials, (err) => {
+                console.log('Registration disabled.');
+                // Accounts.createUser(this.credentials, (err) => {
                 //    if (err) {
                 //        this.error = err;
                 //    }
                 //    else {
                 //        $state.go('home');
                 //    }
-                //});
+                // });
             };
-
         }
-    }
+    };
 });

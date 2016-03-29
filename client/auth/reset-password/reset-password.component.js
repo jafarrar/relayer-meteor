@@ -1,9 +1,9 @@
-angular.module('relayer').directive('resetpw', function() {
+angular.module('relayer').directive('resetpw', () => {
     return {
         restrict: 'E',
         templateUrl: 'client/auth/reset-password/reset-password.html',
         controllerAs: 'rspwd',
-        controller: function ($scope, $reactive, $state) {
+        controller: function($scope, $reactive, $state) {
             $reactive(this).attach($scope);
 
             this.credentials = {
@@ -16,13 +16,11 @@ angular.module('relayer').directive('resetpw', function() {
                 Accounts.forgotPassword(this.credentials, (err) => {
                     if (err) {
                         this.error = err;
-                    }
-                    else {
+                    } else {
                         $state.go('login');
                     }
                 });
             };
-
         }
-    }
+    };
 });

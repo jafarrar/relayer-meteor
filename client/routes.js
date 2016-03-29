@@ -1,18 +1,14 @@
-let requireLogin = {
-    currentUser: ['$q', function($q) {
-        if (Meteor.userId() == null) {
-            console.log("null");
+const requireLogin = {
+    currentUser: ['$q', ($q) => {
+        if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
         }
-        else {
-            console.log("not null");
-            return $q.resolve();
-        }
+        return $q.resolve();
     }]
 };
 
 angular.module('relayer')
-    .config(function($urlRouterProvider, $stateProvider, $locationProvider) {
+    .config(($urlRouterProvider, $stateProvider, $locationProvider) => {
         $locationProvider.html5Mode(true);
 
         $stateProvider
@@ -46,17 +42,19 @@ angular.module('relayer')
             .state('streamView', {
                 url: '/stream/:slug',
                 template: '<stream-view></stream-view>',
-                onEnter: function() {
+                onEnter: () => {
                     JWPlayer.load(Meteor.settings.public.jwPlayerKey);
                 }
             });
 
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise('/');
     })
-    .run(function ($rootScope, $state) {
-        $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-            if (error === 'AUTH_REQUIRED') {
-                $state.go('login');
+    .run(($rootScope, $state) => {
+        $rootScope.$on('$stateChangeError',
+            (event, toState, toParams, fromState, fromParams, error) => {
+                if (error == 'AUTH_REQUIRED') {
+                    $state.go('login');
+                }
             }
-        });
+        );
     });

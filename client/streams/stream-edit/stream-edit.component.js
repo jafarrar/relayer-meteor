@@ -1,9 +1,9 @@
-angular.module('relayer').directive('streamEdit', function() {
+angular.module('relayer').directive('streamEdit', () => {
     return {
         restrict: 'E',
         templateUrl: 'client/streams/stream-edit/stream-edit.html',
         controllerAs: 'se',
-        controller: function($scope, $stateParams, $reactive, $state) {
+        controller: function($scope, $stateParams, $reactive) {
             $reactive(this).attach($scope);
 
             this.subscribe('streams');
@@ -35,60 +35,59 @@ angular.module('relayer').directive('streamEdit', function() {
                     if (error) {
                         this.error = error.reason;
                         this.activeError = true;
-                        console.log("Unable to update the stream", error);
-                    }
-                    else {
+                    } else {
                         this.error = {};
                         this.activeError = false;
-                        console.log("Stream updated.");
                     }
                 });
 
                 // Redirect user if slug is updated
                 // currently doesn't handle non-unique well
-                if (this.stream.slug != $stateParams.slug) {
-                    //$state.go('streamEdit', {slug: this.stream.slug});
-                    console.log("change state requested");
+                if (this.stream.slug !== $stateParams.slug) {
+                    // $state.go('streamEdit', {slug: this.stream.slug});
+                    console.log('change state requested');
                 }
             };
 
             this.autorun(() => {
                 try {
-                    this.aspectRatio = Streams.getAspectRatio(this.getReactively('stream.resX'), this.getReactively('stream.resY'));
+                    this.aspectRatio = Streams.getAspectRatio(
+                        this.getReactively('stream.resX'),
+                        this.getReactively('stream.resY')
+                    );
                 } catch (e) {
                     this.aspectRatio = '16:9';
-                    console.log(e);
                 }
-            })
+            });
 
             this.generateStreamKey = () => {
                 this.stream.streamKey = Random.id();
             };
 
             this.updateChannelList = () => {
-                this.call('updateAppList', (error, result) => {
+                this.call('updateAppList', (error) => {
                     if (error) {
-                        console.log("Unable to update  list", error);
+                        this.error = error.reason;
                     } else {
-                        console.log("List Updated");
+                        this.error = {};
                     }
                 });
             };
 
             this.dropPublisher = () => {
-                if(!confirm("Kill the stream?")) {
+                if (!confirm('Kill the stream?')) {
                     return false;
                 }
                 this.call('dropPublisher', this.stream.channel, this.stream.streamKey, (error) => {
                     if (error) {
-                        console.log("Unable to drop publisher", error);
-                    }
-                    else {
-                        console.log("Publisher dropped");
+                        this.error = error.reason;
+                    } else {
+                        this.error = {};
                     }
                 });
-            };
 
+                return true;
+            };
         }
-    }
+    };
 });
